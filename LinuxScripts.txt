@@ -1,0 +1,102 @@
+#!/bin/bash
+# Enable the epel-release
+sudo amazon-linux-extras install epel
+# Install and start Apache web server
+sudo yum install -y httpd php
+# Start the httpd service
+service httpd start
+# Install CPU stress test tool
+#sudo yum install -y stress
+echo "Hello World for $(user) from us-east-1a and $(hostname -f)" > /var/www/html/index.html
+
+
+vi /usr/share/httpd/noindex/index.html
+<img src="https://c.ndtvimg.com/2020-09/if4pp5j8_vegetarian_625x300_30_September_20.jpg" alt="">
+<img src="" alt="https://cdn-images-1.medium.com/max/802/1*PDHya_zt_n657nYUAm1OeA.jpeg">
+<img src="https://dzone.com/storage/temp/9277925-high-availability.png" alt="">
+<img src="https://th.bing.com/th/id/OIP.Im2SdW5IRUCOOdU53VUW7wHaEn?pid=ImgDet&rs=1" alt="">
+<img src="https://cdn-images-1.medium.com/max/802/1*PDHya_zt_n657nYUA" alt="">
+https://cdn-images-1.medium.com/max/802/1*PDHya_zt_n657nYUAm1OeA.jpeg
+https://dzone.com/storage/temp/9277925-high-availability.png
+
+#!/bin/bash
+I=0
+while [ $I -lt 11 ]
+do
+echo $(date) > file$I
+I=$(( $I+1 ))
+sleep 1
+echo " create File $I "
+done
+
+
+
+
+Ubuntu:
+=============
+#!/bin/bash
+apt update -y
+apt install -y nfs-common
+apt install -y openjdk-8-jdk
+apt install -y nfs-common
+sudo apt-get update
+wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
+sudo sh -c 'echo deb https://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
+sudo apt-get update
+sudo apt-get install jenkins
+
+Jenkins Install on Aws Linux:
+-----------------------------
+yum update -y
+sudo yum install wget
+sudo amazon-linux-extras install java-openjdk11
+sudo amazon-linux-extras install epel -y
+
+sudo wget -O /etc/yum.repos.d/jenkins.repo \
+    https://pkg.jenkins.io/redhat-stable/jenkins.repo
+sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
+sudo yum upgrade
+sudo yum install jenkins -y
+sudo systemctl enable jenkins
+sudo systemctl start jenkins
+sudo systemctl status jenkins
+
+cat /var/lib/jenkins/secrets/initialAdminPassword
+
+Jenkins Install on Aws Ubuntu:
+-----------------------------
+wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
+sudo sh -c 'echo deb https://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
+sudo apt-get update
+sudo apt-get install jenkins -y
+
+/usr/lib/jvm/java-8-openjdk-amd64/bin
+
+sudo systemctl enable jenkins
+sudo systemctl start jenkins
+sudo systemctl status jenkins
+
+Java Path setting on Environment: vi .bash_profile
+----------------------------------
+MAVEN_HOME=/root/maven
+M2=/root/maven/bin
+JAVA_HOME=/usr/lib/jvm/java-11-openjdk-11.0.16.0.8-1.amzn2.0.1.x86_64
+PATH=$PATH:$HOME/bin:$JAVA_HOME:$MAVEN_HOME:$M2
+
+
+1. Check your current java version and list if you have multiple
+-------------------------------------------------------
+# java -version
+# update-alternatives --config java
+2. If you have java-11 over here, select that. otherwise, please install it
+# amazon-linux-extras
+# amazon-linux-extras install <java-openjdk11>
+3. Run 1st command again to select java-11.
+# amazon-linux-extras install <java-openjdk11>
+# amazon-linux-extras
+4. Update the java path accordingly and run the Jenkins job again.
+I added a screenshot for reference.
+
+
+
+

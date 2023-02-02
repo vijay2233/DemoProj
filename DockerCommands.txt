@@ -1,0 +1,77 @@
+DockerBasicCommands:
+-------------------
+1.how to search a docker image in hub.docker.com
+docker search httpd
+2.Download a docker image from hub.docker.com
+docker image pull <image_name>:<image_version/tag>
+3.List out docker images from your local system
+docker image ls
+3.Create/run/start a docker container from image
+docker run -d --name <container_Name> <image_name>:<image_version/tag>
+
+d - run your container in back ground (detached)
+4.Expose your application to host server
+docker run -d  -p <host_port>:<container_port> --name <container_Name> <image_name>:<Image_version/tag>
+
+docker run -d --name httpd_server -p 8080:80 httpd:2.2
+5.List out running containers
+docker ps
+6.List out all docker container (running, stpooed, terminated, etc...)
+docker ps -a
+7.run a OS based container which interactive mode (nothing but login to container after it is up and running)
+docker run -i -t --name centos_server centos:latest
+i - interactive
+t - Terminal
+8.Stop a container
+docker stop <container_id>
+9.Start a container which is in stopped or exit state
+docker start <container_id>
+10.Remove a container
+docker rm <container_id>
+11.login to a docker container
+docker exec -it <container_Name> /bin/bash
+docker stop $(docker ps -a -q)
+docker rm $(docker ps -a -q)
+docker rmi $(docker images -a -q)
+docker volume ls
+docker volume rm volume_name volume_name
+docker volume prune
+docker image prune
+docker system prune
+docker network prune
+=========================================
+FROM centos
+RUN cd /etc/yum.repos.d/
+RUN sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-*
+RUN sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS-*
+RUN yum install java -y
+RUN yum update -y
+RUN mkdir /opt/tomcat
+WORKDIR /opt/tomcat
+ADD https://dlcdn.apache.org/tomcat/tomcat-11/v11.0.0-M1/bin/apache-tomcat-11.0.0-M1-deployer.tar.gz .
+RUN tar -xzvf apache-tomcat-11.0.0-M1-deployer.tar.gz
+RUN mv apache-tomcat-11.0.0-M1-deployer/* /opt/tomcat
+EXPOSE 8080
+CMD ["/opt/tomcat/bin/catalina.sh", "run"]
+
+------------------------------------------------------------------
+FROM centos
+RUN cd /etc/yum.repos.d/
+RUN sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-*
+RUN sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS-*
+RUN yum install java -y
+RUN mkdir /opt/tomcat/
+WORKDIR /opt/tomcat
+ADD https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.71/bin/apache-tomcat-9.0.71.tar.gz .
+RUN tar xvfz apache*.tar.gz
+RUN mv apache-tomcat-9.0.71/* /opt/tomcat
+EXPOSE 8080
+CMD ["/opt/tomcat/bin/catalina.sh", "run"]
+-----------------------------------------------------------
+FROM tomcat:latest
+RUN cp -R /usr/local/tomcat/webapps.dist/* /usr/local/tomcat/webapps/
+COPY ./*.war /usr/local/tomcat/webapps/
+------------------------------------------------------------
+
+cd //var//lib//jenkins//workspace//DockerProj
+rm -rf cd //var//lib//jenkins//workspace//DockerProj/*.*

@@ -1,0 +1,41 @@
+sudo service awslogs status
+sudo service awslogs start 
+ps -ef | grep -v grep | grep awslogs
+more /var/awslogs/etc/awslogs.conf
+
+#Return to the Instances console, select your running instance and click Actions > Instance Settings > Edit User Data:
+
+#!/bin/bash -xe
+echo 'Amazon Linux AMI' > /etc/issue
+yum install -y gcc
+curl https://s3.amazonaws.com//aws-cloudwatch/downloads/latest/awslogs-agent-setup.py -O
+chmod +x ./awslogs-agent-setup.py
+./awslogs-agent-setup.py -n -r us-west-2 -c https://raw.githubusercontent.com/cloudacademy/labs-CloudWatch-SSHfailures/master/LogAgentConfig.txt
+/opt/aws/bin/cfn-signal -e 0 --stack cloudacademylabs --resource MonitorCloudWatchLabInstance  --region us-west-2
+yum install -y ec2-instance-connect
+
+
+
+Disk added:
+-----------
+df -h (it is showing the disk information)
+lsblk  ( list block of partistion)
+fdisk ( partistion disc)
+fdisk /dev/xvdf  ( command for help: m after that enter n .. enter  finally enter w and close)
+lsblk  (partistion is available)
+mkfs.ext4 /dev/xvdf1
+mkdir myebsvol
+df -h
+mount /dev/xvdf1 myebsvol/
+
+Increae the volume(AWS console)
+lsblk 
+growpart /dev/xvdf 1
+lsblk
+resize2fs /dev/xvdf1
+lsblk
+
+(It was stored in memory, so we can added into below for permanat)
+vi /etc/fstab
+
+/dev/xvdf1	myebsvol/	ext4	defaults,noatime 1 1

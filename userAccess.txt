@@ -1,0 +1,75 @@
+TestUser1 Inida@123 468379394649
+AKIAW2DMWMJMS7KCUDHB 
+h6yiGaSgpaH5ahHqKn2ehskKBOwFqHI+Y33wZBdY
+
+TestUser2    Inida@1122
+AKIAW2DMWMJM5556RTWG
+qtR+Xuf07XakARY3GAGsp+HEKC5FyBuu3PEN/cBP
+
+
+Admin
+AKIAW2DMWMJMQIC2W7Z2 
+kJC/Pv6IK8GZjKB6mEL74yi2WHueEioE4P1+iOvm
+
+
+==================================================================================
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": "ec2:Describe*",
+      "Resource": "*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "ec2:StartInstances",
+        "ec2:StopInstances",
+        "ec2:RebootInstances"
+      ],
+      "Resource": [
+        "arn:aws:ec2:us-east-1:468379394649:instance/*"
+      ],
+      "Condition": {
+        "StringEquals": {
+          "ec2:ResourceTag/Owner": "TestUser1"
+        }
+      }
+    }
+  ]
+}
+
+====================================================
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": "ec2:Describe*",
+      "Resource": "*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "ec2:StartInstances",
+        "ec2:StopInstances",
+        "ec2:RebootInstances"
+      ],
+      "Resource": [
+        "arn:aws:ec2:us-east-1:468379394649:instance/*"
+      ],
+      "Condition": {
+        "StringEquals": {
+          "ec2:ResourceTag/Owner": "TestUser2"
+        }
+      }
+    }
+  ]
+}
+
+
+
+
+
+sanjay.chalke@capgemini.com
